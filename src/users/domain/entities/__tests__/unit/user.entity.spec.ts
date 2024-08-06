@@ -1,17 +1,25 @@
 import { faker } from '@faker-js/faker';
-import { UserEntity } from '../../user.entity';
+import { UserEntity, UserProps } from '../../user.entity';
 import e from 'express';
 
 describe('User entity unit tests', () => {
-  it('Constructor method', () => {
-    const props = {
+  let props: UserProps;
+  let sut: UserEntity;
+
+  beforeEach(() => {
+    props = {
       name: faker.person.fullName(),
       email: faker.internet.email(),
       password: faker.internet.password(),
     };
 
-    const sut = new UserEntity(props);
+    sut = new UserEntity(props);
+  });
 
-    expect(sut.props.email).toEqual(props.name);
+  it('Constructor method', () => {
+    expect(sut.props.name).toEqual(props.name);
+    expect(sut.props.email).toEqual(props.email);
+    expect(sut.props.password).toEqual(props.password);
+    expect(sut.props.createdAt).toBeInstanceOf(Date);
   });
 });
