@@ -39,4 +39,13 @@ describe('ClassValidatorFields integration tests', () => {
       ],
     });
   });
+
+  it('Should validate without errors', () => {
+    const validator = new StubClassValidatorFields();
+
+    expect(validator.validate({ name: 'value', price: 10 })).toBeTruthy();
+    expect(validator.validatedData).toStrictEqual(
+      new StubRules({ name: 'value', price: 10 }),
+    );
+  });
 });
