@@ -128,6 +128,28 @@ describe('UserValidator unit tests', () => {
     });
   });
 
+  describe('Created at field', () => {
+    it('Invalidation cases for createdAt field', () => {
+      let isValid = sut.validate({
+        ...UserDataBuilder({}),
+        createdAt: 10 as any,
+      });
+      expect(isValid).toBeFalsy();
+      expect(sut.errors['createdAt']).toStrictEqual([
+        'createdAt must be a Date instance',
+      ]);
+
+      isValid = sut.validate({
+        ...UserDataBuilder({}),
+        createdAt: '2024' as any,
+      });
+      expect(isValid).toBeFalsy();
+      expect(sut.errors['createdAt']).toStrictEqual([
+        'createdAt must be a Date instance',
+      ]);
+    });
+  });
+
   it('Valid case for user validator class', () => {
     const props = UserDataBuilder({});
     const isValid = sut.validate(props);
