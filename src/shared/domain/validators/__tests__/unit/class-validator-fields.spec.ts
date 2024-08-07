@@ -1,4 +1,5 @@
 import { ClassValidatorFields } from '../../class-validator-fields';
+import * as libClassValidator from 'class-validator';
 
 class StubClassValidatorFields extends ClassValidatorFields<{
   field: string;
