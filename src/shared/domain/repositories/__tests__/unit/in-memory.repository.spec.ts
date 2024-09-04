@@ -27,4 +27,11 @@ describe('InMemoryRepository unit tests', () => {
   it('Should throw error when entity not found', async () => {
     await expect(sut.findById('fakeId')).rejects.toThrow(new NotFoundError('Entity not found'));
   });
+
+  it('Should find an entity by id', async () => {
+    const entity = new StubEntity({ name: 'test', price: 10 });
+    await sut.insert(entity);
+    const result = await sut.findById(entity._id);
+    expect(entity.toJSON()).toStrictEqual(result.toJSON());
+  });
 });
