@@ -16,4 +16,10 @@ describe('InMemoryRepository unit tests', () => {
   beforeEach(() => {
     sut = new StubInMemoryRepository();
   });
+
+  it('Should insert a new entity', async () => {
+    const entity = new StubEntity({ name: 'test', price: 10 });
+    await sut.insert(entity);
+    expect(entity.toJSON()).toStrictEqual(sut.items[0].toJSON());
+  });
 });
