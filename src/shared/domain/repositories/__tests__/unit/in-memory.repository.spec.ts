@@ -70,4 +70,11 @@ describe('InMemoryRepository unit tests', () => {
       new NotFoundError('Entity not found'),
     );
   });
+
+  it('Should delete an entity', async () => {
+    const entity = new StubEntity({ name: 'test', price: 10 });
+    await sut.insert(entity);
+    await sut.delete(entity._id);
+    expect(sut.items).toHaveLength(0);
+  });
 });
