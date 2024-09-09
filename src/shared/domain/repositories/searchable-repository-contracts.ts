@@ -42,7 +42,17 @@ export class SearchParams {
     return this._perPage;
   }
 
-  private set perPage(value: number) {}
+  private set perPage(value: number) {
+    let _perPage = +value;
+    if (
+      Number.isNaN(_perPage) ||
+      _perPage <= 0 ||
+      parseInt(_perPage as any) !== _perPage
+    ) {
+      _perPage = this._perPage;
+    }
+    this._perPage = _perPage;
+  }
 
   get sort() {
     return this._sort;
