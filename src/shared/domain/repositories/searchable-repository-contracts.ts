@@ -80,7 +80,10 @@ export class SearchParams {
     return this._filter;
   }
 
-  private set filter(value: string | null) {}
+  private set filter(value: string | null) {
+    this._filter =
+      value === null || value === undefined || value === '' ? null : `${value}`;
+  }
 }
 
 export interface SearchableRepositoryInterface<
