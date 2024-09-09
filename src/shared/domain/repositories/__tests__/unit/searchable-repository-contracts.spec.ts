@@ -25,5 +25,32 @@ describe('Searchable Repository unit tests', () => {
         expect(new SearchParams({ page: i.page }).page).toBe(i.expected);
       });
     });
+
+    it('perPage prop', () => {
+      const sut = new SearchParams();
+      expect(sut.perPage).toEqual(15);
+
+      const params = [
+        { perPage: null as any, expected: 15 },
+        { perPage: undefined as any, expected: 15 },
+        { perPage: '' as any, expected: 15 },
+        { perPage: 'test' as any, expected: 15 },
+        { perPage: 0, expected: 15 },
+        { perPage: -1, expected: 15 },
+        { perPage: 5.5, expected: 15 },
+        { perPage: true, expected: 15 },
+        { perPage: false, expected: 15 },
+        { perPage: {}, expected: 15 },
+        { perPage: 1, expected: 1 },
+        { perPage: 2, expected: 2 },
+        { perPage: 25, expected: 25 },
+      ];
+
+      params.forEach((i) => {
+        expect(new SearchParams({ perPage: i.perPage }).perPage).toBe(
+          i.expected,
+        );
+      });
+    });
   });
 });
