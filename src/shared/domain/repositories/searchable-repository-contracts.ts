@@ -58,7 +58,10 @@ export class SearchParams {
     return this._sort;
   }
 
-  private set sort(value: string | null) {}
+  private set sort(value: string | null) {
+    this._sort =
+      value === null || value === undefined || value === '' ? null : `${value}`;
+  }
 
   get sortDir() {
     return this._sortDir;
