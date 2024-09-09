@@ -67,7 +67,14 @@ export class SearchParams {
     return this._sortDir;
   }
 
-  private set sortDir(value: string | null) {}
+  private set sortDir(value: string | null) {
+    if (!this.sort) {
+      this._sortDir = null;
+      return;
+    }
+    const dir = `${value}`.toLowerCase();
+    this._sortDir = dir !== 'asc' && dir !== 'desc' ? 'desc' : dir;
+  }
 
   get filter() {
     return this._filter;
