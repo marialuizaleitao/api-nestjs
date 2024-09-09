@@ -19,11 +19,11 @@ export class SearchParams {
   protected _filter: string | null;
 
   constructor(props: SearchProps) {
-    this._page = props.page || 1;
-    this._perPage = props.perPage || 15;
-    this._sort = props.sort || null;
-    this._sortDir = props.sortDir || null;
-    this._filter = props.filter || null;
+    this.page = props.page || 1;
+    this.perPage = props.perPage || 15;
+    this.sort = props.sort || null;
+    this.sortDir = props.sortDir || null;
+    this.filter = props.filter || null;
   }
 
   get page() {
