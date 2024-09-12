@@ -108,5 +108,30 @@ describe('Searchable Repository unit tests', () => {
         ).toBe(i.expected);
       });
     });
+
+    it('filter prop', () => {
+      const sut = new SearchParams();
+      expect(sut.filter).toBeNull();
+
+      const params = [
+        { filter: null as any, expected: null },
+        { filter: undefined as any, expected: null },
+        { filter: '' as any, expected: null },
+        { filter: 'test', expected: 'test' },
+        { filter: 0, expected: '0' },
+        { filter: -1, expected: '-1' },
+        { filter: 5.5, expected: '5.5' },
+        { filter: true, expected: 'true' },
+        { filter: false, expected: 'false' },
+        { filter: {}, expected: '[object Object]' },
+        { filter: 1, expected: '1' },
+        { filter: 2, expected: '2' },
+        { filter: 25, expected: '25' },
+      ];
+
+      params.forEach((i) => {
+        expect(new SearchParams({ filter: i.filter }).filter).toBe(i.expected);
+      });
+    });
   });
 });
