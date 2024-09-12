@@ -76,5 +76,37 @@ describe('Searchable Repository unit tests', () => {
         expect(new SearchParams({ sort: i.sort }).sort).toBe(i.expected);
       });
     });
+
+    it('sortDir prop', () => {
+      let sut = new SearchParams();
+      expect(sut.sortDir).toBeNull();
+
+      sut = new SearchParams({ sort: null });
+      expect(sut.sortDir).toBeNull();
+
+      sut = new SearchParams({ sort: undefined });
+      expect(sut.sortDir).toBeNull();
+
+      sut = new SearchParams({ sort: '' });
+      expect(sut.sortDir).toBeNull();
+
+      const params = [
+        { sortDir: null as any, expected: 'desc' },
+        { sortDir: undefined as any, expected: 'desc' },
+        { sortDir: '' as any, expected: 'desc' },
+        { sortDir: 'test', expected: 'desc' },
+        { sortDir: 0, expected: 'desc' },
+        { sortDir: 'asc', expected: 'asc' },
+        { sortDir: 'desc', expected: 'desc' },
+        { sortDir: 'ASC', expected: 'asc' },
+        { sortDir: 'DESC', expected: 'desc' },
+      ];
+
+      params.forEach((i) => {
+        expect(
+          new SearchParams({ sort: 'field', sortDir: i.sortDir }).sortDir,
+        ).toBe(i.expected);
+      });
+    });
   });
 });
